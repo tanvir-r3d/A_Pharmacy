@@ -187,7 +187,7 @@ if (isset($_GET['del_id']))
                 </div>
 
                 <input type="hidden" class="edit_id" value="">
-                <button  name="update" class="btn btn-primary update">Update</button>
+                <button  name="update" type="button" class="btn btn-primary update">Update</button>
 
             </div>
           </div>
@@ -231,7 +231,6 @@ if (isset($_GET['del_id']))
 
                 }
 
-
             });
         });
      });
@@ -241,9 +240,11 @@ if (isset($_GET['del_id']))
 <!-- Edit Machine -->
 <script type="text/javascript">
  $(document).ready(function(){
+
    $(document).on("click",".edit",function(){
      var id=$(this).attr("get_attr");
-     $(".edit_id").val(id);
+
+        $(".edit_id").val(id);
      $.ajax({
        url:'ajax_call.php',
        type:'post',
@@ -263,6 +264,45 @@ if (isset($_GET['del_id']))
          $(".expire_date").val(medicine.expire_date);
        }
      });
-   });
+
+      $(".update").click(function(){
+       var edit_id=$(".edit_id").val();
+       var medicine_name=$(".medicine_name").val();
+       var category=$(".category").val();
+       var purchase_price=$(".purchase_price").val();
+       var selling_price=$(".selling_price").val();
+       var store_box=$(".store_box").val();
+       var quantity=$(".quantity").val();
+       var genric_name=$(".genric_name").val();
+       var company=$(".company").val();
+       var effects=$(".effects").val();
+       var expire_date=$(".expire_date").val();
+       $.ajax({
+         url:'ajax_call.php',
+         type:'post',
+         data:{'edit_id':edit_id,'medicine_name':medicine_name,'category':category,'purchase_price':purchase_price,'selling_price':selling_price,'store_box':store_box,'quantity':quantity,'genric_name':genric_name,'company':company,'effects':effects,'expire_date':expire_date},
+
+         success:function(data){
+
+           if(data=='true')
+           {
+             $(".qty").val('');
+             swal("Success!", "Quantity Updated", "success");
+
+           }
+           else
+           {
+               swal("Opps!", "Something Went Wrong", "error");
+           }
+
+           setInterval(function(){ location.reload()}, 1000);
+
+         }
+
+
+       });
+     });
+     });
+
  });
 </script>

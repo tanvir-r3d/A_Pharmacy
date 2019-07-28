@@ -32,4 +32,28 @@ if (isset($_POST['id']))
 		echo $data;
 	}
 }
+
+if (isset($_POST['edit_id']))
+{
+	$id=$_POST['edit_id'];
+	$medicine_name=$_POST['medicine_name'];
+	$category=$_POST['category'];
+	$purchase_price=$_POST['purchase_price'];
+	$selling_price=$_POST['selling_price'];
+	$store_box=$_POST['store_box'];
+	$quantity=$_POST['quantity'];
+	$genric_name=$_POST['genric_name'];
+	$company=$_POST['company'];
+	$effects=$_POST['effects'];
+	$expire_date=$_POST['expire_date'];
+
+	$update_medicine=$db->update("medicine_list","medicine_name='$medicine_name',category='$category',purchase_price='$purchase_price',selling_price='$selling_price',store_box='$store_box',quantity='$quantity',genric_name='$genric_name',company='$company',effects='$effects',expire_date='$expire_date'","id=$id");
+	if ($update_medicine)
+	{
+		echo "true";
+	}
+	else {
+		echo "false";
+	}
+}
 ?>
