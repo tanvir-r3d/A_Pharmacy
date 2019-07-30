@@ -85,6 +85,7 @@ else
 	include 'layout/main.php';
 	}
 ?>
+</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="../Assets/js/jquery-1.11.1.min.js"></script>
 	<script src="../Assets/js/bootstrap.min.js"></script>

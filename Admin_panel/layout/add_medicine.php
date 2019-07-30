@@ -1,5 +1,4 @@
-<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-  <div class="panel panel-default">
+  <div class="panel panel-default" style="max-width:800px;">
 <?php
 if(isset($_POST['submit']))
 {
@@ -8,7 +7,7 @@ if(isset($_POST['submit']))
   if ($add_med)
   {
     ?>
-    <div class="alert bg-teal" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
+    <div class="alert bg-teal" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Succefully Added Medicine<a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
     <?php
   }
 }
@@ -74,11 +73,9 @@ if(isset($_POST['submit']))
               <input class="form-control" type="date" name="expire_date">
             </div>
 
-            <button  name="submit" class="btn btn-primary">Submit Button</button>
-            <button type="reset" class="btn btn-default">Reset Button</button>
+            <button  name="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-default">Reset</button>
           </div>
         </form>
       </div>
     </div>
-
- </div>
