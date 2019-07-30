@@ -1,3 +1,4 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 <?php
 $medicine=new medicine;
 extract($_POST);
@@ -12,7 +13,6 @@ if (isset($_GET['del_id']))
   }
 }
 ?>
-<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
   <a href="?page=add_medicine"><button style="margin-top:5px;" type="button" class="btn btn-md btn-primary">Add Medicine</button></a>
   <table id="example" class="table table-striped table-bordered" style="width:100%; margin-top:10px;">
           <thead>
