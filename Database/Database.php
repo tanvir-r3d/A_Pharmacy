@@ -27,9 +27,10 @@ class Database{
     $insert=$this->db->query($query) or die("ERROR".__LINE__);
     if ($this->db->affected_rows>0)
     {
-      return $insert;
+      return true;
     }
-    else {
+    else 
+    {
       return false;
     }
   }
@@ -68,7 +69,8 @@ class Database{
   {
     $query="DELETE FROM $table_name WHERE $condition";
     $destroy=$this->db->query($query) or die("ERROR".__LINE__);
-    if ($destroy) {
+    if ($destroy) 
+    {
       return $destroy;
     }
   }

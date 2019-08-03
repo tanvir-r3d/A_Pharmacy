@@ -37,6 +37,20 @@ class expanses
 	}
 
 
+	// public function show_all()
+	// {
+	// 	$category_data=$this->db->select_all("expanse_category_list");
+	// 	if($category_data)
+	// 	{
+	// 		return $category_data;
+	// 	}
+	// 	else
+	// 	{
+	// 		echo "Something Went Wrong";
+	// 	}
+	// }
+
+
 	public function list()
 	{
 		$data=$this->db->select_all("expenses_list");
@@ -57,6 +71,32 @@ class expanses
 		{
 			?>
     <div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-danger">&nbsp;</em> Data Deleted <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
+    <?php
+		}
+	}
+
+	public function ex_category_list()
+	{
+		$data=$this->db->select_all("expanse_category_list");
+		if($data)
+		{
+			return $data;
+		}
+		else
+		{
+			echo "Somethin Went Wrong";
+		}
+	}
+
+
+	public function cat_del($id)
+	{
+		$cat_delete=$this->db->destroy("expanse_category_list","id='$id'");
+		if($cat_delete)
+		{
+			?>
+    	<div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-danger">&nbsp;</em> Data Deleted <a href="#" 
+    	class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
     <?php
 		}
 	}

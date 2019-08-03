@@ -2,9 +2,9 @@
   <div class="panel panel-default">
 
 <?php
+  $expenses=new expanses;
 if(isset($_POST['submit']))
 {
-  $expenses=new expenses;
   $add_ex=$expenses->add($_POST);
   if($add_ex)
   {
@@ -24,13 +24,16 @@ if(isset($_POST['submit']))
           <div class="form-group">
             <label>Category</label>
             <select name="category" class="form-control">
-            	<option value="aqua">Aqua</option>
-            	<option value="tissue">Tissue</option>
-            	<option value="travel">Travel</option>
-            	<option value="salary">Salary</option>
-            	<option value="utolity">Utility</option>
-            	<option value="fuel">Fuel</option>
-            	<option value="gasolina">Gasolina</option>
+            	<?php
+              $category=$expenses->ex_category_list();
+              while($category_fetch=$category->fetch_assoc())
+              {
+                ?>
+                <option value="<?=$category_fetch['category']?>"><?=$category_fetch['category']?></option>
+                <?php
+              }
+
+              ?>
             </select>
           </div>
 

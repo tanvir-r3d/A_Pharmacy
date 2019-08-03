@@ -50,72 +50,102 @@ if(isset($_GET['del_id']))
 </table>
 </div>
 
-
+<!-- Edit Machine -->
 <form method="post">
-<div class="fade modal" id="edit">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" name="button">x</button>
-        <h4 class="model-title"><i class="fa fa-edit"></i>Edit Expanse</h4>
-      </div>
-
-      <div class="modal-body">
+  <div class="modal fade" id="edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
         
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" name="button">x</button>
+          <h4 class="modal-title"><i class="fa fa-edit"></i>Edit Expanse</h4>
+        </div>
 
+        <div class="modal-body">
+          
           <div class="form-group">
             <label>Category</label>
             <select name="category" class="form-control category">
-              <option value="aqua">Aqua</option>
-              <option value="tissue">Tissue</option>
-              <option value="travel">Travel</option>
-              <option value="salary">Salary</option>
-              <option value="utolity">Utility</option>
-              <option value="fuel">Fuel</option>
-              <option value="gasolina">Gasolina</option>
+              <?php
+              $category=$expanses->ex_category_list();
+              while($category_fetch=$category->fetch_assoc())
+              {
+                ?>
+                <option value="<?=$category_fetch['category']?>"><?=$category_fetch['category']?></option>
+                <?php
+              }
+
+              ?>
             </select>
           </div>
 
-
           <div class="form-group">
               <label>Amount</label>
-              <input class="form-control amount" type="number" name="amount" value="">
+              <input class="form-control amount" type="number" name="amount">
             </div>
 
 
-          <div class="form-group">
+           <div class="form-group">
               <input class="form-control ex_edit_id" type="hidden" name="id">
-            </div>
+            </div> 
 
-            <button  name="update" class="btn btn-primary update">Update</button>
+
+            <button type="button"  name="update" class="btn btn-primary update">Update Button</button>
+
+        </div>
 
       </div>
-
     </div>
-    
   </div>
-</div>
 </form>
+
+<!-- Edit id show -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $(document).on("click",".edit",function(){
       var ex_edit_id=$(this).attr("get_attr");
       $(".ex_edit_id").val(ex_edit_id);
 
-    $.ajax({
-      url:'ajax_call.php',
-      type:'post',
-      dataType:'json',
-      data:{'ex_edit_id':ex_edit_id},
-      success:function(data)
-      {
-        // alert(data);
-        $(".category").val(data.category);
-        $(".amount").val(data.amount);
-      }
-    });
+      $.ajax({
+        url:'ajax_call.php',
+        type:'post',
+        dataType:'json',
+        data:{'ex_edit_id':ex_edit_id},
+        success:function(data)
+        {
+          $(".category").val(data.category);
+          $(".amount").val(data.amount);
+        }
+      });
+
+      $(".update").click(function(){
+        var update_ex=$(".ex_edit_id").val();
+        var category=$(".category").val();
+        var amount=$(".amount").val();
+
+        $.ajax({
+          url:'ajax_call.php',
+          type:'post',
+          data:{'update_ex':update_ex,'category':category,'amount':amount},
+
+          success:function(data){
+
+            if(data=='true')
+            {
+              swal('Success!', 'Expanse Updated', 'success');
+            }
+            else
+            {
+              swal('Opps!', 'Somehing Went Wrong', 'error');
+            }
+
+            setInterval(function(){ location.reload()},1000);
+          }
+        });
+      });
     });
   });
 </script>
