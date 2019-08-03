@@ -27,7 +27,7 @@ class Database{
     $insert=$this->db->query($query) or die("ERROR".__LINE__);
     if ($this->db->affected_rows>0)
     {
-      return $insert;
+      return true;
     }
     else {
       return false;
@@ -70,7 +70,7 @@ class Database{
     $destroy=$this->db->query($query) or die("ERROR".__LINE__);
     if ($destroy)
     {
-      echo "DATA DELETED";
+      return true;
     }
   }
 
@@ -80,7 +80,7 @@ class Database{
     $update=$this->db->query($query) or die("ERROR".__LINE__);
     if ($this->db->affected_rows>0)
     {
-      return $update;
+      return true;
     }
   }
 

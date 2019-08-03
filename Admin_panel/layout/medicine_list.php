@@ -1,3 +1,4 @@
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 <?php
 $medicine=new medicine;
 extract($_POST);
@@ -7,12 +8,11 @@ if (isset($_GET['del_id']))
   if ($erase)
   {
     ?>
-    <div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
+    <div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Data Deleted <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
     <?php
   }
 }
 ?>
-<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
   <a href="?page=add_medicine"><button style="margin-top:5px;" type="button" class="btn btn-md btn-primary">Add Medicine</button></a>
   <table id="example" class="table table-striped table-bordered" style="width:100%; margin-top:10px;">
           <thead>
@@ -139,10 +139,15 @@ if (isset($_GET['del_id']))
                 <div class="form-group">
                   <label>Category</label>
                   <select  name="category" class="form-control category">
-                    <option value="injection">Injection</option>
-                    <option value="tablet">Tablet</option>
-                    <option value="capsule">Capsule</option>
-                    <option value="syrup">Syrup</option>
+                    <?php
+                    $category=$medicine->show_category();
+                    while ($fetch=$category->fetch_assoc())
+                    {
+                      ?>
+                      <option value="<?=$fetch['category']?>"><?=$fetch['category']?></option>
+                      <?php
+                    }
+                    ?>
                   </select>
                 </div>
 
@@ -187,6 +192,7 @@ if (isset($_GET['del_id']))
                 </div>
 
                 <input type="hidden" class="edit_id" value="">
+
                 <button  name="update" type="button" class="btn btn-primary update">Update</button>
 
             </div>
@@ -197,8 +203,8 @@ if (isset($_GET['del_id']))
 </form>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
  <script type="text/javascript">
      $(document).ready(function(){
         $(document).on("click",".load",function(){
@@ -218,7 +224,7 @@ if (isset($_GET['del_id']))
 
                   if(data=='true')
                   {
-                    $(".qty").val('');
+                    // $(".qty").val('');
                     swal("Success!", "Quantity Updated", "success");
 
                   }
@@ -286,8 +292,7 @@ if (isset($_GET['del_id']))
 
            if(data=='true')
            {
-             $(".qty").val('');
-             swal("Success!", "Quantity Updated", "success");
+             swal("Success!", "Medicine Updated", "success");
 
            }
            else
@@ -303,6 +308,20 @@ if (isset($_GET['del_id']))
        });
      });
      });
-
+    //
+    // $.ajax({
+    //   url:'ajax_call.php',
+    //   type:'post',
+    //   data:{'category':category},
+    //   success:function(data)
+    //   {
+    //     var i=0;
+    //     while (data[i])
+    //     {
+    //         console.log(data[i]);
+    //         i++;
+    //     }
+    //   }
+    //  });
  });
 </script>

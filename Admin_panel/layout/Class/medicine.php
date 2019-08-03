@@ -56,10 +56,57 @@ class medicine
     if ($erase)
     {
       ?>
-      <div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
+      <div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-danger">&nbsp;</em> Successfully Deleted <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
       <?php
     }
   }
+
+  public function add_category($data)
+  {
+    $category=$data['category'];
+    $description=$data['description'];
+    if (empty($category)||empty($description))
+    {
+      ?>
+      <div class="alert bg-warning" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Empty Field Require <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
+      <?php
+    }
+    else
+    {
+        $add_category=$this->db->insert("category_list","category='$category',description='$description'");
+        if ($add_category)
+        {
+        ?>
+        <div class="alert bg-teal" role="alert"><em class="fa fa-lg fa-check">&nbsp;</em> Successfully Added Category <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
+        <?php
+        }
+    }
   }
 
+  public function show_category()
+  {
+    $category_data=$this->db->select_all("category_list");
+    if ($category_data)
+    {
+      return $category_data;
+    }
+    else
+    {
+        echo "Something Went Wrong";
+    }
+  }
+
+  public function category_delete($data)
+  {
+    $id=$data;
+    $erase=$this->db->destroy("category_list","id='$id'");
+    if ($erase)
+    {
+      ?>
+      <div class="alert bg-danger" role="alert"><em class="fa fa-lg fa-danger">&nbsp;</em> Successfully Deleted <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
+      <?php
+    }
+  }
+
+  }
 ?>

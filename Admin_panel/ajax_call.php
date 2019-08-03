@@ -33,6 +33,10 @@ if (isset($_POST['id']))
 	}
 }
 
+
+
+
+
 if (isset($_POST['edit_id']))
 {
 	$id=$_POST['edit_id'];
@@ -56,4 +60,60 @@ if (isset($_POST['edit_id']))
 		echo "false";
 	}
 }
+
+if (isset($_POST['category']) && isset($_POST['description']))
+{
+	$category=$_POST['category'];
+	$description=$_POST['description'];
+	$insert_category=$db->insert("category_list","category='$category',description='$description'");
+	if ($insert_category)
+	{
+		echo "true";
+	}
+	else
+	{
+		echo "false";
+	}
+}
+
+if (isset($_POST['category_id']))
+{
+	$id=$_POST['category_id'];
+	$show=$db->select("category_list","id=$id")->fetch_assoc();
+	if ($show)
+	{
+		$data=json_encode($show);
+		echo $data;
+	}
+}
+
+
+if (isset($_POST['category_id']) && isset($_POST['e_category']) && isset($_POST['e_description']))
+{
+	$id=$_POST['category_id'];
+	$category=$_POST['e_category'];
+	$description=$_POST['e_description'];
+	$update=$db->update("category_list","category='$category',description='$description'","id=$id");
+	if ($update)
+	{
+		echo "true";
+	}
+	else
+	{
+			echo "false";
+	}
+}
+/*
+if (isset($_POST['category'])
+{
+	$category=$db->get("*","category_list","1");
+	if ($category)
+	{
+		while ($fetch=$category->fetch_assoc())
+		{
+			echo "<option value="<?=fetch[1]?>"><?=fetch[1]?></option>";
+		}
+	}
+}
+*/
 ?>
