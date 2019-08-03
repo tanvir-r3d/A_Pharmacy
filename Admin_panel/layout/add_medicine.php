@@ -1,14 +1,13 @@
-<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-  <div class="panel panel-default">
+  <div class="panel panel-default" style="max-width:800px;">
 <?php
-$medicine=new medicine;
 if(isset($_POST['submit']))
 {
+  $medicine=new medicine;
   $add_med=$medicine->add($_POST);
   if ($add_med)
   {
     ?>
-    <div class="alert bg-teal" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Welcome to the admin dashboard panel bootstrap template <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
+    <div class="alert bg-teal" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Succefully Added Medicine<a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a></div>
     <?php
   }
 }
@@ -27,15 +26,10 @@ if(isset($_POST['submit']))
             <div class="form-group">
               <label>Category</label>
               <select  name="category" class="form-control">
-                <?php
-                $category=$medicine->show_category();
-                while($fetch=$category->fetch_assoc())
-                {
-                  ?>
-                  <option value="<?=$fetch['category']?>"><?=$fetch['category']?></option>
-                  <?php
-                }
-                 ?>
+                <option value="injection">Injection</option>
+                <option value="tablet">Tablet</option>
+                <option value="capsule">Capsule</option>
+                <option value="syrup">Syrup</option>
               </select>
             </div>
 
@@ -79,26 +73,9 @@ if(isset($_POST['submit']))
               <input class="form-control" type="date" name="expire_date">
             </div>
 
-            <button  name="submit" class="btn btn-primary">Submit Button</button>
-            <button type="reset" class="btn btn-default">Reset Button</button>
+            <button  name="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-default">Reset</button>
           </div>
         </form>
       </div>
     </div>
-
- </div>
-<!--
-<script type="text/javascript">
-  $(document).ready(function(){
-    var category="category";
-        $.ajax({
-          url:'ajax_call.php',
-          type:'post',
-          data:{'category':category},
-          success:function(category)
-          {
-            $(".category").html(category);
-          }
-         });
-  });
-</script> -->

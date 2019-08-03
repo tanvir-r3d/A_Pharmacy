@@ -1,4 +1,3 @@
-<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 <?php
 if (isset($_POST['submit']))
 {
@@ -29,5 +28,4 @@ if (isset($_POST['submit']))
     </div>
 
 </form>
-</div>
 </div>
